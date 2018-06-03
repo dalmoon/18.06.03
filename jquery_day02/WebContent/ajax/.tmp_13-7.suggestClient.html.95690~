@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+ <script type="text/javascript" src="../lib/jquery-1.9.1.min.js"></script>
+<script>
+     $(function(){
+	 	$("#keyWord").keyup(function(){
+			if ($("#keyWord").val() == "") {
+				$("#suggest").hide();
+				return;
+			}
+			
+			$.ajax({
+				type:"post" ,
+				url:"7-7.suggestServer.jsp",
+				//data : "keyWord=" + $("#keyWord").val(),
+				data: $("#search").serialize(),  //serialize()?????„ì²´ ?„ì†¡
+				datatype: "text",
+				success : function(data){
+					var result = data.split("|");
+					
+					var count = parseInt(result[0]);
+					if(count > 0 ){
+						var keyWordList = result[1].split(",");
+						var str="";
+						$.each(keyWordList , function(index , key){
+							str+="<a href='#'>"+ key +"</a><br>"
+						})
+						
+						$("#suggest").html(str);
+						$("#suggest").show();
+					}else{
+						$("#suggest").hide();
+					}
+					
+				} ,
+				error :function(err){
+					alert(err+"=> ?¤ë¥˜ë°œìƒ")
+				}
+				
+			})	
+		})//keyup?´ë²¤????
+		
+		
+		//aë¥??´ë¦­?ˆì„???´ë²¤???±ë¡
+		$("div").on("click" ,"a",function(){
+			$("#keyWord").val($(this).text());
+			$("#suggest").hide();
+		})
+		
+		
+		
+	 });//jQuery ??
+
+</script>
+</head>
+<body>
+<h3> [ Suggest ê¸°ëŠ¥ êµ¬í˜„ ]</h3>	
+<form name="search" id="search">
+	<input type="text" name="keyWord" id="keyWord"/>
+	<input type="button" value="ê²?ƒ‰"/>	
+</form>
+<!--?œì‹œ???¨ì–´ ì¶œë ¥ë¶?¶„ -->
+<div id="suggest" style="display:none"></div>
+
+</body>
+</html>
+
+
+
+
+

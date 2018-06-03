@@ -1,0 +1,57 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <title>JSON파일 로드하기</title>
+		<style>
+		div{width:300px;height:200px;
+		    background-color:yellow; 
+			padding:5px;
+		}
+		table{border:inset 3px red}
+		th,td{text-align:center;border:solid 1px gray}
+	</style>
+    <script type="text/javascript" src="../lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+       $(function(){ 	
+		  $("#btn").click(function(){
+			  //getJSON() : 응답데이터가 json형식
+		  	  $.getJSON("13-4.getJSON.json" , function(data){
+			  	  /*			  	  
+data= [
+    { "id": "jang" ,  "name": "장희정" },
+    { "id": "kim"  ,  "name": "김육섭" },
+    { "id": "king" ,  "name": "오정원" },
+    { "id": "queen",  "name": "여왕" }]
+			  	  */
+		  		  
+		  		  alert("성공 : " + data)
+				  
+				  var table="<table><tr><th>번호</th><th>아이디</th><th> 이름</th></tr>";
+				 
+				  // 배열 데이터 반복처리
+				  //$.each(컬렉션자스변수,function(index ,item(반복변수)){
+				  $.each(data, function(index ,item){
+					 table+="<tr>";
+					 table+="<td>"+(index+1)+"</td>";
+					 //item = 선택된 배열요소( 한개의 맵) = { "id": "jang" ,  "name": "장희정" }
+					 table+="<td>"+item['id']+"</td>";//item.id , item(key)에 해당하는 value 찾기
+					 table+="<td>"+item.name+"</td>";//item(key)에 해당하는 value 찾기
+					 table+="</tr>"
+				  });
+				  table+="</table>"
+				  				 
+				  //$("#display").html(table); //#display 에 수정
+				  
+				  $("#display").empty();//기존에 있는 데이터 지우기
+				  $("#display").append(table);//#display 영역안에 추가			  
+			  });
+		  })
+	   })
+    </script>        
+</head>
+<body>
+    <h3> $.getJSON(url [ ,success]) 함수 </h3>
+    <input type="button" id="btn" value="getJSON요청" />
+    <div id="display">요청결과 출력영역</div>
+</body>
+</html>

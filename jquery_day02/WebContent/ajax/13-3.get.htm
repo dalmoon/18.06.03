@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>post() 메소드</title>		
+    <script type="text/javascript" src="../lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+       $(function(){ 	
+		  $("#book").change(function(){ //선택상자의 항목이 변경
+			//get방식 ajax통신 (jQuery를 선택하면 val()은 2 ,요청파라미터명은 book속성명) 
+			  	 $.get("/jquery_day02/PostSendServlet" , 
+				        /*"book="+$(this).val()*/ {book:$(this).val()} ,
+				        //응답데이터(선택한 교재데이터 ) 도착하면 
+				        //자동으로 function(data) 콜백실행 
+				        //가공조작  #display 선택자영역에 채워줌
+				        function(data){ //data ="jquery.jpg"
+				  	      $("#display").html("<img src='images/"+data+"'>")			 		  
+				        }
+				 );
+			  })	  	 		 
+	   })
+    </script>        
+</head>
+<body>
+    <h3> $.get(url [,data] [,success] [,dataType]) 함수 </h3>
+	
+   <form>
+   	교재 선택 : 
+	<select name="book" id="book">
+		<option>--선택 --</option>
+		<option value="0">spring</option>
+		<option value="1">Android</option>
+		<option value="2">jQuery</option>
+		<option value="3">javaScript</option>
+	</select>
+   </form>
+   <!-- <div id="display"><img src='images/spring.jpg'></div> -->
+    <div id="display"></div>
+</body>
+</html>

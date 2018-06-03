@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>JSON파일 로드하기</title>
+		<style>
+		div{width:300px;height:200px;
+		    background-color:yellow; 
+			padding:5px;
+		}
+		table{border:inset 3px red}
+		th,td{text-align:center;border:solid 1px gray}
+	</style>
+    <script type="text/javascript" src="../lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+       $(function(){ 	
+		  $("#btn").click(function(){
+		  	  $.getJSON("7-3.getJSON.json" , function(data){
+			  	  alert("성공 : " + data)
+				  
+				  var table="<table><tr><th>번호</th><th>아이디</th><th> 이름</th></tr>";
+				  $.each(data, function(index ,item){
+					 table+="<tr>";
+					 table+="<td>"+(index+1)+"</td>";
+					 table+="<td>"+item['id']+"</td>";//item(key)에 해당하는 value 찾기
+					 table+="<td>"+item.name+"</td>";//item(key)에 해당하는 value 찾기
+					 table+="</tr>"
+				  });
+				  table+="</table>"
+				  				 
+				  //$("#display").html(table); //#display 에 추가
+				  
+				  $("#display").empty();//기존에 있는 데이터 지우기
+				  $("#display").append(table);////#display 영역안에 추가			  
+			  });
+		  })
+	   })
+    </script>        
+</head>
+<body>
+    <h3>소스 7-3  $.getJSON(url [ ,success]) 함수 </h3>
+    <input type="button" id="btn" value="getJSON요청" />
+    <div id="display">요청결과 출력영역</div>
+</body>
+</html>

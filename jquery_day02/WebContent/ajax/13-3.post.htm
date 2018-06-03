@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>post() 메소드</title>		
+    <script type="text/javascript" src="../lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+    	  //$.post() 매개변수 분리
+		$("#book").change(function() {
+			//---------------------------------
+			var handler=function(data,status){// data =응답데이터
+				alert("응답상태 : " +status); //success
+				
+				$("#display").html("<img src='images/"+data+"'>");
+				
+			};
+			//---------------------------------
+			//param= "book="+$("#book").val(); //쿼리스트링
+			var param={book:$("#book").val()}; //맵구조
+			//---------------------------------
+			//post방식 ajax통신 
+			//응답데이터(선택한 교재데이터 ) 가공조작  선택자영역에 채워줌
+			$.post("/jquery_day02/PostSendServlet",param,handler);
+			//$.get("/jquery_day02/PostSendServlet",param,handler);
+		});
+	});
+    
+    </script>        
+</head>
+<body>
+    <h3> $.post(url [,data] [,success] [,dataType]) 함수 </h3>
+	
+   <form>
+   	교재 선택 : 
+	<select name="book" id="book">
+		<option>--선택 --</option>
+		<option value="0">spring</option>
+		<option value="1">Android</option>
+		<option value="2">jQuery</option>
+		<option value="3">javaScript</option>
+	</select>
+   </form>
+   <!-- <div id="display"><img src='images/spring.jpg'></div> -->
+    <div id="display"></div>
+</body>
+</html>

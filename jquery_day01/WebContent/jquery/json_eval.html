@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h4>학생  명단</h4>
+    <p style="background-color: yellow">
+		이름: <span id="name"></span>&nbsp 
+		나이: <span id="age"></span>
+	</p>
+
+    <script>
+    //문자열이 JS코드로 변환 3
+    alert(eval("1+2"));
+    
+    
+    //고객목록배열(3명의 고객정보맵) 
+        var s = '[' +
+        '{"name":"Hong","age":"21" },' +
+        '{"name":"Kim","age":"22" },' +
+        '{"name":"Park","age":"23" }]';
+        //JSON 파싱 객체 생성
+        //eval() : 문자열을 JS객체로 변환
+        var students = eval("(" + s + ")");
+        //배열 2번째 맵요소의 name속성 
+        alert(students[1].name);
+        students[1].name = "Lee";
+        alert(students[1].name);
+        //-------------------------
+        document.getElementById("name").innerHTML 
+        = students[1].name;
+        document.getElementById("age").innerHTML 
+        = students[1].age;
+    </script>
+
+</body>
+</html>

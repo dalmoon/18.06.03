@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+#dog {
+	display: none;
+}
+</style>
+
+<script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+<script type="text/javascript">
+	$(function() {
+		//TODO click(매개변수,...) : 매개변수 등록
+		//function() : 콜백함수
+		 $("button").click(function(e) {
+			$("#dog").show("slow",function(){
+				console.log("강아지그림 보임");
+			}),
+			$("#dog").hide("slow",function(){
+				console.log("강아지그림 숨김");
+			})
+			
+		}) 
+/* 
+		$("#show").click(function(e) {
+			//$("#dog").show("slow", function() {
+				//$("#dog").fadeIn("slow", function() {
+					$("#dog").slideDown("slow", function() {
+				console.log("강아지그림 출력");
+			});
+		}) */
+		//------------------------------------
+
+		/* $("#hide").click(function(e) {
+			//$("#dog").hide("slow", function() {
+				$("#dog").slideUp("slow", function() {
+				console.log("강아지그림 비출력");
+			});
+		}) */
+		//------------------------------------
+	}
+
+	);
+</script>
+
+</head>
+<body>
+	
+
+	<img id="dog" src="dog.png">
+	<button id="show">SHOW</button>
+	<button id="hide">HIDE</button>
+
+</body>
+</html>

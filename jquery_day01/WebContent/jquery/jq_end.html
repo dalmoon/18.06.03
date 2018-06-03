@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.b1 {
+	border: 1px solid red;
+}
+
+.b2 {
+	border: 1px solid green;
+}
+</style>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script>
+	$(document).ready(function() {
+        //find('p') 자식요소 p 검색선택
+		$('div').find('p').addClass('b1').end().addClass('b2');
+        //end() 생략시 b2 클래스 최종 적용
+		// div 밑에 p를 찾아 b1을 적용후 빠져나와(end) 
+		//p 그 위의 div로 되돌아가 b2를 적용
+		//$('div').addClass('b2');
+
+	});
+</script>
+
+</head>
+
+<body>
+
+	<div>
+
+		<p>단락1</p>
+
+		<p>단락2</p>
+
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+<script>
+
+         //var handleEvent=function () {};
+         //$(document).ready(function () {handleEvent();}
+        $(document).ready(function () {
+            $("#text").click(function () {
+                alert($("#target").text()); // 내용의 텍스트만 리턴
+            	//alert($("#target").html()); //내용의 텍스트 +태그까지 리턴
+            	//confirm("1111");
+            });
+            $("#html").click(function () {
+            	//html("수정내용")
+                $("#target").html("이것은 <h2>하나의</h2> 단락입니다.");
+            	//$("#target").text("이것은 <h2>하나의</h2> 단락입니다.");
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <p id="target">이것은 <strong>하나의</strong> 단락입니다.</p>
+    <button id="text">text()</button>
+    <button id="html">html()</button>
+</body>
+</html>

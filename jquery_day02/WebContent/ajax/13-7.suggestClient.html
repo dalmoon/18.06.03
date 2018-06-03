@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+ <script type="text/javascript" src="../lib/jquery-1.9.1.min.js"></script>
+<script>
+     $(function(){
+	 	$("#keyWord").keyup(function(){
+			if ($("#keyWord").val() == "") {
+				$("#suggest").hide();
+				return;
+			}
+			
+			$.ajax({
+				type:"post" ,
+				url:"13-7.suggestServer.jsp",
+				//data : "keyWord=" + $("#keyWord").val(),
+				data: $("#search").serialize(),  //serialize()는 폼 전체 전송
+				datatype: "text",
+				success : function(data){
+					var result = data.split("|");
+					
+					var count = parseInt(result[0]);
+					if(count > 0 ){
+						var keyWordList = result[1].split(",");
+						var str="";
+						$.each(keyWordList , function(index , key){
+							str+="<a href='#'>"+ key +"</a><br>"
+						})
+						
+						$("#suggest").html(str);
+						$("#suggest").show();
+					}else{
+						$("#suggest").hide();
+					}
+					
+				} ,
+				error :function(err){
+					alert(err+"=> 오류발생")
+				}
+				
+			})	
+		})//keyup이벤트 끝
+		
+		
+		//a를 클릭했을때 이벤트 등록
+		$("div").on("click" ,"a",function(){
+			$("#keyWord").val($(this).text());
+			$("#suggest").hide();
+		})
+		
+		
+		
+	 });//jQuery 끝
+
+</script>
+</head>
+<body>
+<h3> [ Suggest 기능 구현 ]</h3>	
+<form name="search" id="search">
+	<input type="text" name="keyWord" id="keyWord"/>
+	<input type="button" value="검색"/>	
+</form>
+<!--제시어 단어 출력부분 -->
+<div id="suggest" style="display:none"></div>
+
+</body>
+</html>
+
+
+
+
+

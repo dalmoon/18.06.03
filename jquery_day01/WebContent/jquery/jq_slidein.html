@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+    <script>
+    //펼치고 접기
+    /*
+    "fast"
+    // 구체적인 시간을 명시할수도 있다. 
+    단위 milliseconds // 0.5초 뒤에 접힘 
+    $("#dog").slideUp(500) ; */
+        $(document).ready(function () {
+            $("#slideDown").click(function () {
+                $("#dog").slideDown("slow");
+            });
+            $("#slideUp").click(function () {
+                $("#dog").slideUp("slow");
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <button id="slideDown">fadeIn()</button>
+    <button id="slideUp">fadeOut()</button><br />
+    <img id="dog" src="dog.png"
+        alt="" width="120" height="100" style="display: none; position: relative;" />
+</body>
+</html>

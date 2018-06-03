@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        div.out {
+            width: 200px;
+            height: 60px;
+            background-color: yellow;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+</head>
+<body>
+    <div class="out">
+        <p>마우스를 여기로 움직이세요.</p>
+        <p>0</p>
+    </div>
+    <script>
+        var i = 0;
+        //function (e) : 이벤트처리함수 ,e =이벤트객체
+        $("div.out").mouseover(function (e) {
+        	//text() 요소의 글내용 리턴
+        	//text(내용) 요소의 내용 변경
+            $("p:first").text("mouse over");
+            $("p:last").text(++i);
+            // 콘솔창 출력
+            console.log(e.pageX +","+ e.pageY+e.type);
+
+        });
+        
+        $("div.out").mouseleave(function () {
+            $("p:first", this).text("mouse leave");            
+
+        }) 
+        //진입시 한번
+         $("div.out").mouseenter(function() {
+        	$("p:first").text("mouse enter");
+        });
+         
+        
+    </script>
+</body>
+</html>

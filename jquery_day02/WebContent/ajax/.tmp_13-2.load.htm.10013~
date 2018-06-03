@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta  charset="UTF-8"/>
+    <title>load 메서드</title>
+	<style>
+		div{width:300px;height:200px;
+		    background-color:yellow; 
+		}
+	</style>
+    
+     <script type="text/javascript" src="../lib/jquery-1.9.1.min.js"></script>
+    
+    <script type="text/javascript">
+        $(function () {
+            $('#btn').click(function () {
+				var data ={name : $("#name").val() , message : "안녕"} //서버측에 전송할 데이터준비
+			    $('#display').load(
+				   "7-2.serverPage.jsp", //서버요청문서
+				   data , //요청시 전송될 데이터
+				   function(a){ //요청완료 후 응답결과 콜백함수
+					alert("요청완료!")
+				});
+            });
+        }); 
+    </script>
+</head>
+<body>
+	<h3>소스 7-2 $(selector).load(url , [params] , [callbackFun]) 함수 </h3>
+	<input type="text" id="name" value="장희정" />
+    <input type="button" id="btn" value="load함수 요청" />
+    <div id="display">요청결과 출력영역</div>
+</body>
+</html>

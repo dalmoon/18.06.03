@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style>
+	table{width: 600px ; height:auto; border: 5px inset green}
+	th,td{text-align:center; border:1px solid gray}
+</style>
+ <script type="text/javascript" src="../lib/jquery-1.9.1.min.js"></script>
+<script>
+	$(function(){
+		$("#send").click(function(){
+			//$.ajax(url, settings 맵)
+			//$.ajax(url을 포함하는 settings 맵)
+			//$.ajax({...})
+			$.ajax({
+			   type: "post", //http 요청방식
+			   url: "13-5.serverPage.jsp", //서버측 페이지
+			  //url: "13-5.serverPage.xml", //서버측 xml페이지
+			   dataType: "xml", //응답데이터 타입설정 ,json ,html,text
+			   success : function(data){// 응답결과 상태코드가 성공했을때 콜백함수
+				 var str="";
+			   // 0번(첫번째행)보다 큰 행은 삭제 ,eq(2), lt(2)
+				 $("#table tr:gt(0)").remove(); //데이터가져오기 버튼 클릭시 기존행들 제거
+				 //$(data).find("person") : data의 자식요소 person 검색
+				 //each()=선택된 person 모든요소 반복함수로
+				 //person 요소를 하나의 테이블행으로 변환
+				 //선택자.each(function(index ,item){선택자들의 반복처리
+				 //each(function(index ,item) item =현재 선택된 person요소
+				 $(data).find("person").each(function(index ,item){
+				 	str+="<tr>" //가공된 최종 결과데이터
+				 	// 셀렉터.find()
+				 	//  person 요소의 name 자식요소 find() 검색후 
+				 	//text()로 그 요소의 텍스트를 가져오기
+				 	//회원 각각의 테이블행 생성
+					str+="<td>" +  $(this).find("name").text() +"</td>";
+					str+="<td>" +  $(this).find("age").text() +"</td>";
+					str+="<td>" +  $(this).find("addr").text() +"</td>";
+					str+="</tr>"
+				 })
+				//0번행(tr)에 신규행(tr)을 형제노드로 추가 				
+				$("#table tr:eq(0)").after(str);	 					   			   
+			   }, 
+			   error :	function(xhr,status,err){//응답 결과 상태코드가 실패했을때 콜백함수
+				   //err:오류메세지확인 
+				   console.log(err +" => 오류 발생")
+			   } 
+				
+			});			
+		})
+	})
+</script>
+</head>
+<body>
+	<a href="#" id="send">데이터가져오기</a><p/>
+	
+  <table id="table">
+  	  <tr>
+  	  	<th>이름</th>
+		<th>나이</th>
+		<th>주소</th>
+  	  </tr>
+  	  
+  </table>
+</body>
+</html>

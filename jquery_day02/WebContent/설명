@@ -1,0 +1,47 @@
+
+*기존 http
+HttpServletRequest 
+서버 Servlet,jsp가 생성한 html화면 
+뷰페이지생성 및 이동 전송 동기통신
+브라우저는 응답 html화면인 전체 뷰페이지단위로  재적재
+화면전부 갱신
+-----------------------------------------
+*ajax - REST(xml,JSON) 서비스
+XmlHttpRequest
+xml데이터페이지 생성 및 전송
+비동기통신+DOM
+브라우저는 현재 화면에서
+응답 일부단위로 조각xml데이터만 재적재 해석
+즉 브라우저는 화면(웹페이지)의 일부만 갱신
+신속한 응답
+
+--------------
+
+load()
+get()
+post()
+ajax() xml
+getJSON()
+------------------
+성능
+- 필요없는 경우 jQuery 사용X 순수자바스크립트 정의 ,조합
+- 캐싱 :미리 값을 변수에 담아둔 후 해당 변수 사용
+var parent= ${부모};
+${부모}.find(자식); //X
+parent.find(자식);
+
+-------------------
+- https://tympanus.net/codrops/
+Admin LTE 
+- https://almsaeedstudio.com/
+
+
+
+
+
+
+
+
+
+
+

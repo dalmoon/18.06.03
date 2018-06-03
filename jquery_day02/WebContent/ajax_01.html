@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Ajax 원리</h1>
+<script type="text/javascript">
+//alert("안녕 Ajax"); //동기 통신 순서
+// 2초후에 콜백함수(응답) 실행(서버와 통신 소요 시간)
+// 통신 소요 시간 길면 비동기 통신
+setTimeout(function() {alert("안녕 Ajax");}, 2000);
+</script>
+<!-- 2초동안 기다리지 않고  잘가 Ajax 출력 : 비동기--> 
+<footer>잘가 Ajax</footer>
+</body>
+</html>

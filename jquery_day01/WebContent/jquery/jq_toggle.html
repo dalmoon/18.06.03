@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+
+
+</head>
+<body>
+<!-- visibility:hidden;  요소 toggle() X 
+display:none; 보이기는 하지만 공간 재배치
+
+toggle,show,
+hide()는 display:none으로 구현됨
+공간 재배치 이루어지지 않기위해 visibility:hidden;
+
+-->
+    <button >Show it</button>
+    <img id="dog" src="dog.png"
+        alt="" width="120" height="100" 
+        style="opacity: 1" />
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $("#dog").toggle(); //show() + hide()
+            });
+        });
+    </script>
+</body>
+</html>

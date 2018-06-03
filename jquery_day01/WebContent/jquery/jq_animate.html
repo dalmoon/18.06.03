@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+    </script>
+    <script>
+    //default duration is 400 milliseconds
+    //5초로 변경
+        $(document).ready(function () {
+            $("button#banimate").click(function () {
+            	//맵구조로 복합속성을 묶어서 한번에 설정
+            	//오른쪽으로 200 이동
+            	// 너비 50 감소
+            	// 높이
+            	//반투명
+                $("#dog").animate({ left: '200px',
+                	width:'-=50px',
+                	height: "200px",
+                	opacity: "0.5" },5000);
+
+            }); //--end click
+            //정지
+            $("button#bstop").click(function(e) {
+            	$("#dog").stop();
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <img id="dog" src="dog.png"
+        alt="" style="position: relative" /><br />
+    <button id="banimate">animate()</button>
+    <button id="bstop">stop()</button>
+</body>
+
+
+
+
+
+
+
+
+
+</html>

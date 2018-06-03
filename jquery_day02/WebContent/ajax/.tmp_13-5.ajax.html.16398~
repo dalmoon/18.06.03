@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style>
+	table{width: 600px ; height:auto; border: 5px inset green}
+	th,td{text-align:center; border:1px solid gray}
+</style>
+ <script type="text/javascript" src="../lib/jquery-1.9.1.min.js"></script>
+<script>
+	$(function(){
+		$("#send").click(function(){
+			$.ajax({
+			   type: "post", //http ?”ì²­ë°©ì‹
+			   url: "7-5.serverPage.jsp", //?œë²„ì¸??˜ì´ì§?
+			   dataType: "xml", //?‘ë‹µ?°ì´????…?¤ì •
+			   success : function(data){// ?‘ë‹µê²°ê³¼ ?íƒœì½”ë“œê°??±ê³µ?ˆì„??ì½œë°±?¨ìˆ˜
+				 var str="";
+				 $("#table tr:gt(0)").remove();
+				 
+				 $(data).find("person").each(function(index , peple){
+				 	str+="<tr>"
+					str+="<td>" +  $(this).find("name").text() +"</td>";
+					str+="<td>" +  $(this).find("age").text() +"</td>";
+					str+="<td>" +  $(this).find("addr").text() +"</td>";
+					str+="</tr>"
+				 })
+								
+				$("#table tr:eq(0)").after(str);						   			   
+			   }, 
+			   error :	function(err){//?‘ë‹µ ê²°ê³¼ ?íƒœì½”ë“œê°??¤íŒ¨?ˆì„??ì½œë°±?¨ìˆ˜
+			   	  alert(err +" => ?¤ë¥˜ ë°œìƒ")
+			   } 
+				
+			});			
+		})
+	})
+</script>
+</head>
+<body>
+	<a href="#" id="send">?°ì´?°ê??¸ì˜¤ê¸?/a><p/>
+	
+  <table id="table">
+  	  <tr>
+  	  	<th>?´ë¦„</th>
+		<th>?˜ì´</th>
+		<th>ì£¼ì†Œ</th>
+  	  </tr>
+  </table>
+</body>
+</html>
