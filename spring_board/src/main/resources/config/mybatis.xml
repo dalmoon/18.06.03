@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration  PUBLIC "-//iBATIS.com//DTD SQL Map Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<typeAliases>
+		<typeAlias alias="Board" type="com.springapp.vo.BoardVO" />
+	</typeAliases>
+	<!-- 1. jndi JDBC연결 -->
+	<!-- <environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="JNDI">
+				<property name="data_source" value="java:comp/env/jdbc/SpringDB" />
+			</dataSource>
+		</environment>
+	</environments> -->
+	<!-- 2. SQL Map파일경로 설정 -->
+	<!-- <mappers>
+		<mapper resource="sqlmap/Board.xml" />
+		
+	</mappers> -->
+</configuration>

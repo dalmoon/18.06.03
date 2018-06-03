@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board_ns">
+	<!--  속성명과 컬럼명 일치하는 경우 컬럼명 생략 가능
+	        순서를 컬럼순서대로 함 O(자바객체)R(결과집합의 행)매핑 -->
+	<resultMap id="BoardResult" type="Board"> 
+		<result property="seq" column="seq"/>
+		<result property="title" />
+		<result property="content" />
+		<result property="writer" />
+		<result property="regdate" />
+		<result property="hitcount" />
+		<result property="password" />
+		<result property="bref" />
+		<result property="bstep" />
+		<result property="blevel" />
+		<result property="uploadPath"/>
+	</resultMap>
+	<!-- 전체 글 조회  참조번호 1차 내림정렬 , 순번 2차 오름정렬
+	       (최신의 글이 상위에 노출)-->
+	<select id="selectAllBoards" resultMap="BoardResult">
+		select * from tblBoard 
+		order by bref desc ,bstep asc
+	</select>
+	<!-- 임의의 글 조회 -->
+	<select id="selectBySeqBoard" parameterType="Map"
+		resultMap="BoardResult">
+		select * from tblBoard
+		<trim prefix="where" prefixOverrides="and">
+		<if test="seq !=null"> 
+		<!--  보더의 seq의 게터 혹은 맵객체의 seq 속성명 호출 일반적인 String ,int형등은 게터 못찾으면서 오류발생 -->
+		 seq=#{seq}   
+		</if>
+		<!--
+    <if test='writer.equals("hong")'> 
+    <if test='writer == "hong"'>  
+	  -->
+		</trim>
+	</select>
+	<!-- 글 추가(글번호 자동 생성) -->
+	<insert id="insertBoard" parameterType="Board"><!-- <selectKey resultClass="java.lang.Integer" 
+			keyProperty="seq"> SELECT SEQ_BOARD.NEXTVAL FROM DUAL </selectKey> -->
+	insert into
+	tblBoard(seq,title,content,writer,regdate,hitcount
+	,password ,bref,UPLOADPATH) 
+	values(SEQ_BOARD.NEXTVAL,#{title},#{content},#{writer},sysdate
+	,#{hitcount},#{password},SEQ_BOARD.currval,#{uploadPath})
+	</insert>
+	<!-- 글제목, 글내용 수정 -->
+	<update id="updateBoard" parameterType="Board">
+	update tblBoard set
+	title=#{title} ,content=#{content} where seq=#{seq}
+	</update>
+	<!-- 글삭제 -->
+	<!-- <delete id="deleteBoard" parameterType="int">
+		delete from tblBoard
+		where  seq=#{seq}	
+		
+	</delete> -->
+	
+	<!--동적쿼리 :  들여쓰기가 0이면 원글이고
+	      답글도 함께 삭제하기위해 삭제조건을
+	      같은 참조번호를 가지는 답글들도 삭제
+	      아니면 답글로 판단하여 그 답글만 삭제 -->
+	<delete id="deleteBoard" parameterType="Board">
+		delete from tblBoard
+		where  
+		 <choose>
+		<when test="blevel==0">
+		bref=#{seq}
+		</when>
+		<otherwise>
+		seq=#{seq}
+		</otherwise>
+		</choose> 
+		
+	</delete>
+	
+	<!-- 답글은 부모원글의 순번 +1,  부모원글의 들여쓰기 수준 +1-->
+	<insert id="insertReplyBoard" parameterType="Board">
+		insert into
+	tblBoard(seq,title,content,writer,regdate,hitcount
+	,password ,bref,bstep,blevel,UPLOADPATH) values(SEQ_BOARD.NEXTVAL,#{title},#{content},#{writer},sysdate
+	,#{hitcount},#{password},#{bref},#{bstep}+1,#{blevel}+1,#{uploadPath})
+	</insert>
+	<!--  같은 참조번호 글그룹이면서 원글순번보다 큰 순번을 가지는
+	         기존의 답글의 순번이 1증가  -->
+	<update id="replyUpdateBoard" parameterType="Board">
+	update  tblBoard  set bstep= bstep+1 
+	where bref=#{bref} and bstep > #{bstep}
+	</update>
+</mapper>

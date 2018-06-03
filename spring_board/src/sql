@@ -1,0 +1,15 @@
+create table tblBoard(
+SEQ NUMBER  primary key,
+TITLE VARCHAR2(200),
+CONTENT VARCHAR2(2000),
+WRITER VARCHAR2(100),
+REGDATE VARCHAR2(14),
+HITCOUNT NUMBER,
+PASSWORD VARCHAR2(10),
+bref number DEFAULT 0, --참조원글번호
+bstep number DEFAULT 0,--글순번
+blevel number DEFAULT 0,--글 들여쓰기 수준
+uploadPath VARCHAR2(100)
+);
+-- 글번호 SEQ
+create sequence seq_board;
